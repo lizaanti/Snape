@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Snape.Models
 {
-    internal enum CellType
+    internal enum CellType //энумератор
     {
+        None,
+        Snake,
+        Food
     }
 }

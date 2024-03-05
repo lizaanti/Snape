@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Snape.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Snape.ViewModels
 		}
 
 		public DelegateCommand StartStopCommand { get; }
+		private MoveDirection _currentMoveDirection = MoveDirection.Right; //флаг текущего направления. при старте игры змейка движется вправо
 
 		public MainVM() {
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
