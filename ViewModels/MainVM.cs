@@ -23,11 +23,26 @@ namespace Snape.ViewModels
 			}
 		}
 
+		public List<List<CellVM>> AllCells { get; } = new List<List<CellVM>>(); //хранение данных для массива матрицы ячеек
+
 		public DelegateCommand StartStopCommand { get; }
 		private MoveDirection _currentMoveDirection = MoveDirection.Right; //флаг текущего направления. при старте игры змейка движется вправо
 
+		private int _rowCount = 10;
+		private int _columnCount = 10;
 		public MainVM() {
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
+
+			for (int row = 0; row < _rowCount; row++)
+			{
+				var rowList = new List<CellVM>();
+				for (int column = 0; column < _columnCount; column++)
+				{
+					var cell = new CellVM(row, column);
+					rowList.Add(cell);	
+				}
+				AllCells.Add(rowList);
+			}
 		}
     }
 }
