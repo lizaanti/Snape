@@ -37,12 +37,13 @@ namespace Snape.ViewModels
 
 		private int _rowCount = 10;
 		private int _columnCount = 10;
-		private int _speed = 300;
+		private const int SPEED = 400;
+		private int _speed = SPEED;
 
 		private Snake _snake;
-
 		private MainWindow _mainVM;
-		public MainVM(MainWindow mainVM) {
+        private CellVM _lastFood;
+        public MainVM(MainWindow mainVM) {
 			_mainVM = mainVM;
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
 
@@ -57,8 +58,8 @@ namespace Snape.ViewModels
 				AllCells.Add(rowList);
 			}
 
-			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2]);
-
+			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2], CreateFood);
+            CreateFood();
             _mainVM.KeyDown += UserKeyDown;
 		}
 
@@ -77,6 +78,7 @@ namespace Snape.ViewModels
 				{
 					ContinueGame = false;
 					MessageBox.Show(ex.Message);
+					_speed = SPEED;
 				}
 			}
 		}
@@ -105,5 +107,23 @@ namespace Snape.ViewModels
 					break;
 			}
 		}
+
+		private void CreateFood()
+		{
+			var random = new Random();
+			int row = random.Next(0, _rowCount);
+            int column = random.Next(0, _columnCount);
+			_lastFood = AllCells[row][column];
+			if (_snake.SnakeCells.Contains(_lastFood))
+			{
+				CreateFood();
+			}
+
+			_lastFood.CellType = CellType.Food;
+			_speed = (int)(_speed * 0.95);
+			_snake.Restart();
+			_lastFood.CellType = CellType.None;
+			CreateFood();
+        }
     }
 }
