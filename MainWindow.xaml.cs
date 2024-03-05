@@ -24,7 +24,7 @@ namespace Snape
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
+            DataContext = new MainVM(this);
         }
     }
 }

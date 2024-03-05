@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Snape.ViewModels
 {
@@ -36,11 +37,13 @@ namespace Snape.ViewModels
 
 		private int _rowCount = 10;
 		private int _columnCount = 10;
+		private int _speed = 300;
 
 		private Snake _snake;
 
-		private MainWindow _mainWnd;
-		public MainVM() {
+		private MainWindow _mainVM;
+		public MainVM(MainWindow mainVM) {
+			_mainVM = mainVM;
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
 
 			for (int row = 0; row < _rowCount; row++)
@@ -56,14 +59,14 @@ namespace Snape.ViewModels
 
 			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2]);
 
-			_mainWnd.KeyDown += UserKeyDown;
+            _mainVM.KeyDown += UserKeyDown;
 		}
 
 		private async Task SnakeGo()
 		{
 			while (ContinueGame)
 			{
-				await Task.Delay(300);
+				await Task.Delay(_speed);
 
 				try
 				{
@@ -78,23 +81,23 @@ namespace Snape.ViewModels
 			}
 		}
 
-		private void UserKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		private void UserKeyDown(object sender, KeyEventArgs e)
 		{
 			switch (e.Key)
 			{
-				case System.Windows.Input.Key.A:
+				case Key.A:
 					if(_currentMoveDirection != MoveDirection.Right)
 						_currentMoveDirection = MoveDirection.Left; 
 					break;
-                case System.Windows.Input.Key.D:
+                case Key.D:
                     if (_currentMoveDirection != MoveDirection.Left)
                         _currentMoveDirection = MoveDirection.Right;
                     break;
-                case System.Windows.Input.Key.W:
+                case Key.W:
                     if (_currentMoveDirection != MoveDirection.Down)
                         _currentMoveDirection = MoveDirection.Up;
                     break;
-                case System.Windows.Input.Key.S:
+                case Key.S:
                     if (_currentMoveDirection != MoveDirection.Up)
                         _currentMoveDirection = MoveDirection.Down;
                     break;
