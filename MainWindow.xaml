@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snape"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,7 +13,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl ItemsSource="{Binding AllCells}" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ItemsControl ItemsSource="{Binding AllCells}" Background="Gray" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ItemsControl ItemsSource="{Binding}">
@@ -34,7 +35,7 @@
                                                     <Setter Property="Background" Value="Black"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding CellType}" Value="Food">
-                                                    <Setter Property="Background" Value="Yellow"/>
+                                                    <Setter Property="Background" Value="Red"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -47,7 +48,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         
-        <Button Grid.Row ="1">
+        <Button Grid.Row ="1" Command="{Binding StartStopCommand}">
             <Button.Content>
                 <TextBlock>
                     <TextBlock.Style>

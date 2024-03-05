@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Snape.ViewModels
 {
@@ -20,6 +21,11 @@ namespace Snape.ViewModels
 			{ 
 				_continueGame = value;
 				RaisePropertyChanged(nameof(ContinueGame)); //метод для уведомления системы об изменении свойства
+
+				if (_continueGame)
+				{
+					SnakeGo();
+				}
 			}
 		}
 
@@ -30,6 +36,10 @@ namespace Snape.ViewModels
 
 		private int _rowCount = 10;
 		private int _columnCount = 10;
+
+		private Snake _snake;
+
+		private MainWindow _mainWnd;
 		public MainVM() {
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
 
@@ -42,6 +52,54 @@ namespace Snape.ViewModels
 					rowList.Add(cell);	
 				}
 				AllCells.Add(rowList);
+			}
+
+			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2]);
+
+			_mainWnd.KeyDown += UserKeyDown;
+		}
+
+		private async Task SnakeGo()
+		{
+			while (ContinueGame)
+			{
+				await Task.Delay(300);
+
+				try
+				{
+					_snake.Move(_currentMoveDirection);
+				}
+
+				catch (Exception ex)
+				{
+					ContinueGame = false;
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
+
+		private void UserKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			switch (e.Key)
+			{
+				case System.Windows.Input.Key.A:
+					if(_currentMoveDirection != MoveDirection.Right)
+						_currentMoveDirection = MoveDirection.Left; 
+					break;
+                case System.Windows.Input.Key.D:
+                    if (_currentMoveDirection != MoveDirection.Left)
+                        _currentMoveDirection = MoveDirection.Right;
+                    break;
+                case System.Windows.Input.Key.W:
+                    if (_currentMoveDirection != MoveDirection.Down)
+                        _currentMoveDirection = MoveDirection.Up;
+                    break;
+                case System.Windows.Input.Key.S:
+                    if (_currentMoveDirection != MoveDirection.Up)
+                        _currentMoveDirection = MoveDirection.Down;
+                    break;
+                default:
+					break;
 			}
 		}
     }
