@@ -13,12 +13,12 @@ namespace Snape.ViewModels
 {
     internal class MainVM : BindableBase
     {
-		private bool _continueGame; //флаг, отвечающий за стоп или продолжение команды
+		private bool _continueGame = false; //флаг, отвечающий за стоп или продолжение команды
 
 		public bool  ContinueGame
 		{
 			get => _continueGame; 
-			private set 
+			set 
 			{ 
 				_continueGame = value;
 				RaisePropertyChanged(nameof(ContinueGame)); //метод для уведомления системы об изменении свойства
@@ -29,8 +29,18 @@ namespace Snape.ViewModels
 				}
 			}
 		}
+        private double _cellD = 50;
+        public double CellD
+        {
+            get => _cellD;
+            set
+            {
+                _cellD = value;
+                RaisePropertyChanged(nameof(CellD));
+            }
+        }
 
-		public List<List<CellVM>> AllCells { get; } = new List<List<CellVM>>(); //хранение данных для массива матрицы ячеек
+        public List<List<CellVM>> AllCells { get; } = new List<List<CellVM>>(); //хранение данных для массива матрицы ячеек
 
 		public DelegateCommand StartStopCommand { get; }
 		private MoveDirection _currentMoveDirection = MoveDirection.Right; //флаг текущего направления. при старте игры змейка движется вправо
@@ -38,23 +48,24 @@ namespace Snape.ViewModels
 		private int _rowCount = 10;
 		private int _columnCount = 10;
 		private const int SPEED = 400;
-		private int _speed = SPEED;
+		private int _speed = 0;
 
-		private Snake _snake;
+        private Snake _snake;
 		private MainWindow _mainVM;
         private CellVM _lastFood;
         public MainVM(MainWindow mainVM) {
+			_speed = SPEED;
 			_mainVM = mainVM;
 			StartStopCommand = new DelegateCommand(() => ContinueGame = !ContinueGame);
 
-			for (int row = 0; row < _rowCount; row++)
+			for (int row = 0; row <= _rowCount; row++)
 			{
 				var rowList = new List<CellVM>();
-				for (int column = 0; column < _columnCount; column++)
+				for (int column = 0; column <= _columnCount; column++)
 				{
-					var cell = new CellVM(row, column);
-					rowList.Add(cell);	
-				}
+                    var newCell = new CellVM(row, column, Models.CellType.None);
+                    rowList.Add(newCell);
+                }
 				AllCells.Add(rowList);
 			}
 
@@ -111,19 +122,19 @@ namespace Snape.ViewModels
 		private void CreateFood()
 		{
 			var random = new Random();
-			int row = random.Next(0, _rowCount);
-            int column = random.Next(0, _columnCount);
+			int row = random.Next(_rowCount);
+            int column = random.Next(_columnCount);
 			_lastFood = AllCells[row][column];
-			if (_snake.SnakeCells.Contains(_lastFood))
-			{
-				CreateFood();
-			}
+			//if (_snake.SnakeCells.Contains(_lastFood))
+			//{
+                //CreateFood();
+                _lastFood.CellType = CellType.Food;
+                _speed = (int)(_speed * 0.95);
+                //_snake.Restart();
+                //_lastFood.CellType = CellType.None;
+            //}
 
-			_lastFood.CellType = CellType.Food;
-			_speed = (int)(_speed * 0.95);
-			_snake.Restart();
-			_lastFood.CellType = CellType.None;
-			CreateFood();
+			//CreateFood();
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using Prism.Mvvm;
 using Snape.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snape.ViewModels
 {
@@ -22,6 +17,13 @@ namespace Snape.ViewModels
                 _cellType = value;
                 RaisePropertyChanged(nameof(CellType));
             }
+        }
+
+        public CellVM(int row, int column, CellType cellType)
+        {
+            Row = row;
+            Column = column;
+            CellType = cellType;
         }
 
         public CellVM(int row, int column)
