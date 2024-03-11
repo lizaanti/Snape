@@ -70,9 +70,10 @@ namespace Snape.ViewModels
 			}
 
 			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2], CreateFood);
-            CreateFood();
+			CreateFood();
             _mainVM.KeyDown += UserKeyDown;
-		}
+
+        }
 
 		private async Task SnakeGo()
 		{
@@ -136,5 +137,6 @@ namespace Snape.ViewModels
 
 			//CreateFood();
         }
+
     }
 }

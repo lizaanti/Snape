@@ -13,7 +13,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl ItemsSource="{Binding AllCells}" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ItemsControl ItemsSource="{Binding AllCells}" Background="MediumVioletRed" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ItemsControl ItemsSource="{Binding}">
@@ -29,13 +29,13 @@
                                         <Style TargetType="Grid">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding CellType}" Value="None">
-                                                    <Setter Property="Background" Value="White"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding CellType}" Value="Snake">
                                                     <Setter Property="Background" Value="Black"/>
                                                 </DataTrigger>
+                                                <DataTrigger Binding="{Binding CellType}" Value="Snake">
+                                                    <Setter Property="Background" Value="HotPink"/>
+                                                </DataTrigger>
                                                 <DataTrigger Binding="{Binding CellType}" Value="Food">
-                                                    <Setter Property="Background" Value="Red"/>
+                                                    <Setter Property="Background" Value="LightYellow"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
