@@ -18,14 +18,16 @@ namespace Snape.Models
 
         private CellVM _start;
         private Action _genarateFood;
+        private Action _incrementScore;
 
-        public Snake(List<List<CellVM>> allCells, CellVM start, Action genarateFood)
+        public Snake(List<List<CellVM>> allCells, CellVM start, Action genarateFood, Action incrementScore)
         {
             _start = start;
             _allCells = allCells;
             _start.CellType = CellType.Snake;
             SnakeCells.Enqueue(_start);
             _genarateFood = genarateFood;
+            _incrementScore = incrementScore;
         }
 
         public void Restart()
@@ -78,6 +80,7 @@ namespace Snape.Models
                         nextCell.CellType = CellType.Snake;
                         SnakeCells.Enqueue(nextCell);
                         _genarateFood?.Invoke();
+                        _incrementScore?.Invoke();
                         break;
                     default:
                         throw _gameOverEx;

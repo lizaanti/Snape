@@ -3,10 +3,13 @@ using Prism.Mvvm;
 using Snape.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Snape.ViewModels
@@ -49,7 +52,8 @@ namespace Snape.ViewModels
 		private int _columnCount = 10;
 		private const int SPEED = 400;
 		private int _speed = 0;
-
+		private int score;
+		private TextBox ScoreTextBox;
         private Snake _snake;
 		private MainWindow _mainVM;
         private CellVM _lastFood;
@@ -69,9 +73,9 @@ namespace Snape.ViewModels
 				AllCells.Add(rowList);
 			}
 
-			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2], CreateFood);
+			_snake = new Snake(AllCells, AllCells[_rowCount / 2][_columnCount/2], CreateFood, ScoreCount);
 			CreateFood();
-            _mainVM.KeyDown += UserKeyDown;
+			_mainVM.KeyDown += UserKeyDown;
 
         }
 
@@ -128,15 +132,22 @@ namespace Snape.ViewModels
 			_lastFood = AllCells[row][column];
 			//if (_snake.SnakeCells.Contains(_lastFood))
 			//{
+               
+            //}
                 //CreateFood();
-                _lastFood.CellType = CellType.Food;
-                _speed = (int)(_speed * 0.95);
+            _lastFood.CellType = CellType.Food;
+            _speed = (int)(_speed * 0.95);
+
                 //_snake.Restart();
                 //_lastFood.CellType = CellType.None;
-            //}
+                //}
 
-			//CreateFood();
+            //CreateFood();
         }
 
+		private void ScoreCount() {
+            score += 1;
+            _mainVM.setScoreTextBox(score);
+        }
     }
 }
