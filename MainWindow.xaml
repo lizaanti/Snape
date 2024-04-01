@@ -70,6 +70,5 @@
         <TextBox x:Name="Username" HorizontalAlignment="Left" Margin="-124,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="34"/>
         <Label x:Name="textName" Content="Имя:" HorizontalAlignment="Left" Margin="-184,13,0,0" VerticalAlignment="Top" Height="35" Width="55" FontSize="20"/>
         <Button x:Name="ResultsButton" Content="Посмотреть результаты" HorizontalAlignment="Left" Margin="-184,94,0,0" VerticalAlignment="Top" Height="31" Width="156" FontSize="14" Click="ResultsButton_Click"/>
-
     </Grid>
 </Window>

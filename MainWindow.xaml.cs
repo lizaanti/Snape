@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Microsoft.Win32;
 
 namespace Snape
 
@@ -29,10 +30,10 @@ namespace Snape
 
         public MainWindow()
         {
-            
+
             InitializeComponent();
             DataContext = new MainVM(this);
-            
+
         }
 
 
@@ -47,5 +48,7 @@ namespace Snape
             Window windowA = new Window();
             windowA.Show();
         }
+
+
     }
 }
