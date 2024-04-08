@@ -4,6 +4,7 @@ using Snape.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Data.SqlClient;
+using System.Runtime.Remoting.Contexts;
+
 
 namespace Snape.ViewModels
 {
@@ -152,23 +156,6 @@ namespace Snape.ViewModels
             _mainVM.setScoreTextBox(score);
         }
 
-        public class User
-        {
-            public string Name { get; set; }
-            public int Score { get; set; }
-
-            public User(string name, int score)
-            {
-                Name = name;
-                Score = score;
-            }
-        }
-
-        List<User> users = new List<User>
-		{
-			new User("Alice", 100),
-			new User("Bob", 150),
-			new User("Charlie", 120)
-		};
+        
     }
 }

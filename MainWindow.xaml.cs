@@ -45,7 +45,7 @@ namespace Snape
 
         public void ResultsButton_Click(object sender, RoutedEventArgs e)
         {
-            Window windowA = new Window();
+            windowA windowA = new windowA();
             windowA.Show();
         }
 

@@ -9,13 +9,16 @@
 
 namespace Snape
 {
+    using Microsoft.Xaml.Behaviors.Media;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class SnakeRecordEntities1 : DbContext
+        
     {
         private static SnakeRecordEntities1 _context;
+
         public SnakeRecordEntities1()
             : base("name=SnakeRecordEntities1")
         {
@@ -34,5 +37,18 @@ namespace Snape
         }
     
         public virtual DbSet<SnakeRecord> SnakeRecord { get; set; }
+
+    }
+    public class User
+    {
+        public string Name { get; set; }
+        public int Score { get; set; }
+
+        public User(string name, int score)
+        {
+            Name = name;
+            Score = score;
+        }
+
     }
 }
