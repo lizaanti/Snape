@@ -14,7 +14,7 @@
         <DataGrid x:Name="DGrid" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя игроков" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество собранных очков" Binding="{Binding Score}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество собранных очков" Binding="{Binding Score}" Width="350"></DataGridTextColumn>
                 
             </DataGrid.Columns>
         </DataGrid>

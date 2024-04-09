@@ -4,41 +4,44 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище SnakeRecordModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="SnakeRecord">
+      <Schema Namespace="Хранилище SnakeAntipovaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Name" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Score" Type="int" />
         </EntityType>
-        <EntityContainer Name="Хранилище SnakeRecordModelContainer">
-          <EntitySet Name="SnakeRecord" EntityType="Self.SnakeRecord" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="Хранилище SnakeAntipovaModelContainer">
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SnakeRecordModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="SnakeRecord">
+      <Schema Namespace="SnakeAntipovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Name" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Score" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="SnakeRecordEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SnakeRecord" EntityType="Self.SnakeRecord" />
+        <EntityContainer Name="SnakeAntipovaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.Users" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище SnakeRecordModelContainer" CdmEntityContainer="SnakeRecordEntities1">
-          <EntitySetMapping Name="SnakeRecord">
-            <EntityTypeMapping TypeName="SnakeRecordModel.SnakeRecord">
-              <MappingFragment StoreEntitySet="SnakeRecord">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SnakeAntipovaModelContainer" CdmEntityContainer="SnakeAntipovaEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SnakeAntipovaModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
               </MappingFragment>

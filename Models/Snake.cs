@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace Snape.Models
@@ -38,6 +39,10 @@ namespace Snape.Models
             SnakeCells.Clear();
             _start.CellType = CellType.Snake;
             SnakeCells.Enqueue(_start);
+        }
+
+        public int GetScore() {
+            return SnakeCells.Count;
         }
 
         public void Move(MoveDirection direction)
@@ -83,6 +88,7 @@ namespace Snape.Models
                         _incrementScore?.Invoke();
                         break;
                     default:
+                      
                         throw _gameOverEx;
                     }
                 }
@@ -93,5 +99,7 @@ namespace Snape.Models
         }
 
         private Exception _gameOverEx => new Exception("Game Over");
+
+        
     }
 }

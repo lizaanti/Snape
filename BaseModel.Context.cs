@@ -9,26 +9,17 @@
 
 namespace Snape
 {
-    using Microsoft.Xaml.Behaviors.Media;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SnakeRecordEntities1 : DbContext
-        
+    public partial class SnakeAntipovaEntities : DbContext
     {
-        private static SnakeRecordEntities1 _context;
 
-        public SnakeRecordEntities1()
-            : base("name=SnakeRecordEntities1")
+        private static SnakeAntipovaEntities _context;
+        public SnakeAntipovaEntities()
+            : base("name=SnakeAntipovaEntities")
         {
-        }
-
-        public static SnakeRecordEntities1 GetContext()
-        {
-            if (_context == null)
-                _context = new SnakeRecordEntities1();
-            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -36,19 +27,13 @@ namespace Snape
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SnakeRecord> SnakeRecord { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
-    }
-    public class User
-    {
-        public string Name { get; set; }
-        public int Score { get; set; }
-
-        public User(string name, int score)
+        public static SnakeAntipovaEntities GetContext()
         {
-            Name = name;
-            Score = score;
-        }
+            if (_context == null) _context = new SnakeAntipovaEntities();
 
+            return _context;
+        }
     }
 }

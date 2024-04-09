@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="219bc1c4d2ca40abb66abe6279c9170f" Name="Diagram1">
-        <EntityTypeShape EntityType="SnakeRecordModel.SnakeRecord" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="0928c719166449cd9a93083af4e447d5" Name="Diagram1">
+        <EntityTypeShape EntityType="SnakeAntipovaModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

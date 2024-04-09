@@ -24,11 +24,11 @@ namespace Snape.ViewModels
 		private bool _continueGame = false; //флаг, отвечающий за стоп или продолжение команды
 
 		public bool  ContinueGame
-		{
-			get => _continueGame; 
-			set 
-			{ 
-				_continueGame = value;
+        {
+			get => _continueGame;
+            set
+            {
+                _continueGame = value;
 				RaisePropertyChanged(nameof(ContinueGame)); //метод для уведомления системы об изменении свойства
 
 				if (_continueGame)
@@ -63,6 +63,8 @@ namespace Snape.ViewModels
         private Snake _snake;
 		private MainWindow _mainVM;
         private CellVM _lastFood;
+
+		public string _name = "Guest";
         public MainVM(MainWindow mainVM) {
 			_speed = SPEED;
 			_mainVM = mainVM;
@@ -98,11 +100,28 @@ namespace Snape.ViewModels
 
 				catch (Exception ex)
 				{
+					Lose();
 					ContinueGame = false;
 					MessageBox.Show(ex.Message);
 					_speed = SPEED;
 				}
 			}
+		}
+
+		private async void Lose() {
+			var user = SnakeAntipovaEntities.GetContext().Users.FirstOrDefault(u => u.Name == _name);
+			if (user != null)
+            {
+				if (user.Score < score) {
+					user.Score = score;
+				}
+			}
+			else 
+			{
+				SnakeAntipovaEntities.GetContext().Users.Add(new Users { Name = _name, Score = score });
+			}
+			
+			await SnakeAntipovaEntities.GetContext().SaveChangesAsync();
 		}
 
 		private void UserKeyDown(object sender, KeyEventArgs e)

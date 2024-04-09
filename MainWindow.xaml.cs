@@ -28,11 +28,14 @@ namespace Snape
     {
         // int score = 10;
 
+        private MainVM model;
+
         public MainWindow()
         {
 
             InitializeComponent();
-            DataContext = new MainVM(this);
+            model = new MainVM(this); ;
+            DataContext = model;
 
         }
 
@@ -49,6 +52,9 @@ namespace Snape
             windowA.Show();
         }
 
-
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            model._name = Username.Text;
+        }
     }
 }

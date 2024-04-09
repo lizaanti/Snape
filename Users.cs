@@ -12,9 +12,10 @@ namespace Snape
     using System;
     using System.Collections.Generic;
     
-    public partial class SnakeRecord
+    public partial class Users
     {
-        public int Name { get; set; }
+        public int id { get; set; }
+        public string Name { get; set; }
         public Nullable<int> Score { get; set; }
     }
 }

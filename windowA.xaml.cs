@@ -23,7 +23,7 @@ namespace Snape
         public windowA()
         {
             InitializeComponent();
-            DGrid.ItemsSource = SnakeRecordEntities1.GetContext().SnakeRecord.ToList();
+            DGrid.ItemsSource = SnakeAntipovaEntities.GetContext().Users.OrderByDescending(u=>u.Score).ToList();
         }
     }
 }
